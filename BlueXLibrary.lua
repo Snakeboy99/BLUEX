@@ -1,4 +1,4 @@
-if getgenv().Executed then return print("Restart Instance") end
+if getgenv().Executed then getgenv().LoadedUI:Destroy() end
 
 local library = {flags = {}};
 local coreGui = game:GetService("CoreGui");
@@ -28,6 +28,7 @@ BlueX_Library.Parent = coreGui
 BlueX_Library.ResetOnSpawn = false
 
 getgenv().Executed = true;
+getgenv().LoadedUI = BlueX_Library;
 
 function library.new(name, settings)
     local UILibraryNAME = name or "UI Library";
