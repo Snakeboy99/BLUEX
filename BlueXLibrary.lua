@@ -1,4 +1,4 @@
-if (getgenv().Executed) then return print("Restart Instance") end
+if getgenv().Executed then return print("Restart Instance") end
 
 local library = {flags = {}};
 local coreGui = game:GetService("CoreGui");
