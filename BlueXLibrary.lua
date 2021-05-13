@@ -1,6 +1,19 @@
-if getgenv().Library then 
-    getgenv().Library:Destroy()
-end
+if getgenv().Executed then
+    if getgenv().Library and typeof(getgenv().Library) == "ScreenGui" then 
+        local lib = getgenv().Library;
+        pcall(function()
+            for i,v in pairs(lib:GetChildren()) do 
+                v:Destroy()
+            end
+            lib:Destroy()
+        end)
+    end
+
+    spawn(function()
+        repeat wait(1) until getgenv().Library;
+        print("Library Loaded!")
+    end)
+end;
 
 local library = {flags = {}};
 local coreGui = game:GetService("CoreGui");
@@ -37,7 +50,7 @@ function library.new(name, settings)
     local options = (typeof(settings) == "table" and settings or {});
     local UI = {};
 
-    local Main_F = Instance.new("Frame")
+    local Main_F = Instance.new()
     Main_F.Name = "Main_F";
     Main_F.Active = true;
     Main_F.BackgroundColor3 = Color3.fromRGB(30, 27, 27);
@@ -738,4 +751,4 @@ function library.new(name, settings)
     return UI; 
 end
 
-return library
+return library;
