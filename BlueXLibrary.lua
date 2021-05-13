@@ -1,6 +1,4 @@
-if getgenv().Library then 
-    getgenv().Library:Destroy()
-end
+if (getgenv().Executed) then return print("Restart Instance") end
 
 local library = {flags = {}};
 local coreGui = game:GetService("CoreGui");
@@ -29,14 +27,14 @@ BlueX_Library.Enabled = true
 BlueX_Library.Parent = coreGui
 BlueX_Library.ResetOnSpawn = false
 
-getgenv().Library = BlueX_Library;
+getgenv().Executed = true;
 
 function library.new(name, settings)
     local UILibraryNAME = name or "UI Library";
     local options = (typeof(settings) == "table" and settings or {});
     local UI = {};
 
-    local Main_F = Instance.new()
+    local Main_F = Instance.new("Frame")
     Main_F.Name = "Main_F";
     Main_F.Active = true;
     Main_F.BackgroundColor3 = Color3.fromRGB(30, 27, 27);
