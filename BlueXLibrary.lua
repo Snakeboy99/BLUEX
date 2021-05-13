@@ -1,19 +1,6 @@
-if getgenv().Executed then
-    if getgenv().Library and typeof(getgenv().Library) == "ScreenGui" then 
-        local lib = getgenv().Library;
-        pcall(function()
-            for i,v in pairs(lib:GetChildren()) do 
-                v:Destroy()
-            end
-            lib:Destroy()
-        end)
-    end
-
-    spawn(function()
-        repeat wait(1) until getgenv().Library;
-        print("Library Loaded!")
-    end)
-end;
+if getgenv().Library then 
+    getgenv().Library:Destroy()
+end
 
 local library = {flags = {}};
 local coreGui = game:GetService("CoreGui");
