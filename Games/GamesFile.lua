@@ -1,5 +1,3 @@
-local Games = {
-  [4483381587] = nil
+{
+"PrisonLife":{"PLACEID":4483381587,"script":"","Status":true},
 }
-
-return Games;
