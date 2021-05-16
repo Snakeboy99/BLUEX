@@ -1,4 +1,17 @@
-if getgenv().Executed then getgenv().LoadedUI:Destroy() end
+print("Auro#5041's new nickname is oreo")
+
+if getgenv().Executed then
+    local LibraryGUI = getgenv().ScreenGui;
+    if not (LibraryGUI) then
+        spawn(function()
+            repeat wait(1) until getgenv().ScreenGui;
+            print("Library Loaded!")
+        end)
+    else
+        LibraryGUI:Destroy()
+        LibraryGUI = nil
+    end
+end;
 
 local library = {flags = {}};
 local coreGui = game:GetService("CoreGui");
@@ -28,7 +41,7 @@ BlueX_Library.Parent = coreGui
 BlueX_Library.ResetOnSpawn = false
 
 getgenv().Executed = true;
-getgenv().LoadedUI = BlueX_Library;
+getgenv().ScreenGui = BlueX_Library
 
 function library.new(name, settings)
     local UILibraryNAME = name or "UI Library";
@@ -542,6 +555,51 @@ function library.new(name, settings)
                     callback(def)
                 end)
             end
+
+            function Elements:AddButton(name, callback)
+                layoutorder = layoutorder + 1
+
+                local Button_Element = Instance.new("Frame")
+                local UICorner_B1 = Instance.new("UICorner")
+                local UICorner_B2 = Instance.new("UICorner")
+                local Button_B = Instance.new("TextButton")
+                local UICorner_B3 = Instance.new("UICorner")
+
+                Button_Element.Name = "Toggle_Element"
+                Button_Element.Parent = ContainerC
+                Button_Element.BackgroundColor3 = Color3.fromRGB(55, 80, 141)
+                Button_Element.BorderSizePixel = 0
+                Button_Element.Size = UDim2.new(1, -12, 0, 32)
+                Button_Element.ZIndex = 7
+                Button_Element.LayoutOrder = layoutorder
+
+                UICorner_B1.CornerRadius = UDim.new(0, 4)
+                UICorner_B1.Parent = Button_Element
+    
+                UICorner_B2.CornerRadius = UDim.new(0, 4)
+                UICorner_B2.Parent = Button_Element
+    
+                Button_B.Name = "ButtonClick"
+                Button_B.Parent = Button_Element
+                Button_B.AnchorPoint = Vector2.new(0.5, 0.5)
+                Button_B.BackgroundColor3 = Color3.fromRGB(79, 132, 255)
+                Button_B.BorderSizePixel = 0
+                Button_B.Position = UDim2.new(0.5, 0, 0.5, 0)
+                Button_B.Size = UDim2.new(1, -6, 1, -6)
+                Button_B.ZIndex = 8
+                Button_B.AutoButtonColor = false
+                Button_B.Font = Enum.Font.SourceSansSemibold
+                Button_B.Text = name or "unnamed button"
+                Button_B.TextColor3 = Color3.fromRGB(255,255,255)
+                Button_B.TextSize = 15.000
+                
+                UICorner_B3.CornerRadius = UDim.new(0, 4)
+                UICorner_B3.Parent = Button_B
+                
+                Button_B.MouseButton1Click:Connect(function()
+                    callback()
+                end)
+            end
             return Elements;
         end
         return tab_Section;
@@ -562,40 +620,8 @@ function library.new(name, settings)
         updateSearch()
     end)
 
-    library.FUNC = {};
-    function library.FUNC:checkTab()
-        if tab.Button then 
-            tab.Button.BackgroundColor3 = Color3.fromRGB(79, 132, 255)
-        end
-
-        local oldName = UILibraryNAME
-        repeat wait(.5)
-            Title.Text = "Last Tab."
-            wait(.15)
-            Title.Text = "Last Tab.."
-            wait(.15)
-            Title.Text = "Last Tab..."
-        until Title.Text ~= oldName;
-
-        local tabMenus = tab.TAB;
-        Title.Text = oldName;
-        tabMenus.Visible = true;
-        Tabs.Visible = false;
-        return wait;
-    end
-
-    spawn(function()
-        local oldt;
-        while true do 
-            repeat wait(10) until tab.Tab ~= nil or tab.Tab ~= oldt;
-            updateSearch()
-            wait()
-        end
-
-        LastTab.MouseButton1Click:Connect(function()
-            if tab.ISMENU == false then return end;
-            library.FUNC:checkTab()(1)
-        end)
+    LastTab.MouseButton1Click:Connect(function()
+        setclipboard(tostring("Discord"))
     end)
 
     local Settings = Instance.new("ImageButton")
@@ -732,7 +758,6 @@ function library.new(name, settings)
             end
         end
     end)
-
     return UI; 
 end
 
