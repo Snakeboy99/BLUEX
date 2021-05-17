@@ -236,7 +236,4 @@ function RUN_FUNCTION(name, extension, configOpt)
         BlueXLoader:Destroy()
     end)
 end
-
-local SET_UP = RUN_FUNCTION("BlueX Library", "json",{
-    URL = "https://raw.githubusercontent.com/Snakeboy99/BLUEX/main/Games/GamesFile.json";
-})
+return RUN_FUNCTION;
