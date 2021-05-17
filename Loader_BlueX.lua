@@ -22,6 +22,7 @@ end;
 function RUN_FUNCTION(name, extension, configOpt)
     local settings = configOpt;
     local PATH_URL = settings.URL or nil;
+    local GAME_NAME = "";
     
     local success = pcall(function()
         game:HttpGet(PATH_URL)
@@ -37,12 +38,12 @@ function RUN_FUNCTION(name, extension, configOpt)
         
         settings.Executable = ""
         for i,v in pairs(DecodedTable) do
-            if (game.PlaceId == v.GAMEID and v.Working) then
+            if (game.PlaceId == tonumber(i) and v.Name and v.Working) then
                 local connection = pcall(function() 
                     settings.Executable = game:HttpGet(v.Script) 
                 end);
                 
-                settings.NAME = tostring(i)
+                GAME_NAME = v.Name
             end
         end
     end
@@ -196,7 +197,7 @@ function RUN_FUNCTION(name, extension, configOpt)
         Message.Text = "Game Found!"
         wait(1)
         setSize(80)
-        Message.Text = settings.NAME
+        Message.Text = GAME_NAME
         wait(.5)
         setSize(100)
         
