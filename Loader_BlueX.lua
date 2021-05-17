@@ -140,6 +140,8 @@ function RUN_FUNCTION(name, extension, configOpt)
         Message.TextColor3 = Color3.fromRGB(197, 197, 197)
         Message.TextSize = 22.000
         Message.TextTransparency = 1
+			
+	wait(2)
 
         createTween(Loader,{Size = UDim2.new(0, 280, 0, 98)}, {
             Style = Enum.EasingStyle.Linear,
