@@ -38,12 +38,12 @@ function RUN_FUNCTION(name, extension, configOpt)
         
         settings.Executable = ""
         for i,v in pairs(DecodedTable) do
-            if (game.PlaceId == tonumber(i) and v.Name and v.Working) then
+            if (game.PlaceId == tonumber(i) and v.name and v.Working) then
                 local connection = pcall(function() 
                     settings.Executable = game:HttpGet(v.Script) 
                 end);
                 
-                GAME_NAME = v.Name
+                GAME_NAME = v.name
             end
         end
     end
